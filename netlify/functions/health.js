@@ -1,3 +1,4 @@
+
 exports.handler = async function () {
   return {
     statusCode: 200,
@@ -6,7 +7,8 @@ exports.handler = async function () {
     },
     body: JSON.stringify({
       success: true,
-      message: "ZZEBTRIX backend is running!"
+      backend: "running",
+      hasApiKey: Boolean(process.env.OPENROUTER_API_KEY)
     })
   };
 };
