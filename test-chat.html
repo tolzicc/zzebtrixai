@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ZZEBTRIX AI Test</title>
+  <style>
+    body {
+      background: #101020;
+      color: white;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    input, button {
+      padding: 12px;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    input {
+      width: 90%;
+    }
+
+    button {
+      background: #7048ff;
+      color: white;
+      border: none;
+    }
+
+    #reply {
+      white-space: pre-wrap;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>ZZEBTRIX AI 🤖</h1>
+  <p>Send your first message to your AI!</p>
+
+  <input id="message" placeholder="Ask ZZEBTRIX anything...">
+  <br>
+  <button id="send">Send Message</button>
+
+  <div id="reply"></div>
+
+  <script>
+    const button = document.getElementById("send");
+    const reply = document.getElementById("reply");
+
+    button.addEventListener("click", async () => {
+      const message =
+        document.getElementById("message").value.trim();
+
+      if (!message) {
+        reply.textContent = "Please type a message first.";
+        return;
+      }
+
+      button.disabled = true;
+      reply.textContent = "ZZEBTRIX is thinking...";
+
+      try {
+        const response = await fetch(
+          "/.netlify/functions/chat",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ message })
+          }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.error || "Request failed");
+        }
+
+        reply.textContent = data.reply;
+      } catch (error) {
+        reply.textContent = "Error: " + error.message;
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
