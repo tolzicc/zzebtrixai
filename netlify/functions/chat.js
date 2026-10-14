@@ -1,1 +1,1 @@
-  model: "openai/gpt-4o-mini",
+model: "openrouter/free",
