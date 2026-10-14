@@ -1,105 +1,491 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#f8fbff">
-<title>ZZEBTRIX AI — Your ideas, amplified</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#080b18">
+<title>ZZEBTRIX AI</title>
+
 <style>
-:root{--bg:#f5f8fc;--panel:#fff;--ink:#15243a;--muted:#718096;--line:#e1e9f3;--blue:#1769ff;--blue2:#5aa7ff;--pale:#eaf3ff;--shadow:0 18px 55px rgba(25,72,130,.10)}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-button,input,textarea,select{font:inherit}button{cursor:pointer}
-.app{min-height:100vh;background:radial-gradient(ellipse at 90% 0%,#e2efff 0,transparent 35%),var(--bg)}
-.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,52px);border-bottom:1px solid #e7eef7;background:rgba(255,255,255,.82);backdrop-filter:blur(16px);position:sticky;top:0;z-index:10}
-.brand{display:flex;align-items:center;gap:11px;font-weight:850;letter-spacing:-.7px;font-size:19px}.logo{width:39px;height:39px;border-radius:13px;background:linear-gradient(145deg,#102e62,#2185ff 70%,#9ad3ff);color:white;display:grid;place-items:center;font-size:22px;font-weight:900;box-shadow:0 7px 20px #1769ff38}.brand small{display:block;font-size:10px;letter-spacing:2px;color:#718096;font-weight:700;margin-top:1px}
-.top-right{display:flex;align-items:center;gap:10px}.status{font-size:12px;color:#64748b;border:1px solid var(--line);padding:8px 11px;border-radius:999px;background:white}.status i{display:inline-block;width:7px;height:7px;border-radius:50%;background:#f0ad4e;margin-right:6px}
-.layout{max-width:1240px;margin:auto;padding:28px clamp(14px,3vw,34px) 45px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:24px}
-.sidebar{background:rgba(255,255,255,.84);border:1px solid var(--line);border-radius:22px;padding:17px;height:max-content;box-shadow:var(--shadow);position:sticky;top:98px}
-.nav-label{font-size:10px;letter-spacing:1.7px;color:#91a0b4;font-weight:800;margin:12px 10px 9px}.navbtn{display:flex;align-items:center;gap:11px;width:100%;border:0;background:transparent;padding:12px 11px;border-radius:12px;color:#61718a;text-align:left;font-weight:700;margin:3px 0}.navbtn span{font-size:18px;width:22px;text-align:center}.navbtn.active{background:#eaf3ff;color:#155ee8}.sidebar-note{margin-top:23px;border-radius:16px;background:linear-gradient(145deg,#102c59,#1769ff);color:white;padding:16px}.sidebar-note strong{display:block;font-size:13px;margin-bottom:7px}.sidebar-note p{font-size:12px;line-height:1.5;color:#d7e7ff;margin:0}
-main{min-width:0}.hero{padding:22px 4px 24px}.eyebrow{display:inline-flex;align-items:center;gap:7px;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;font-weight:850;color:#1769ff}.eyebrow:before{content:"";width:22px;height:2px;background:#1769ff}.hero h1{font-size:clamp(30px,4.4vw,49px);line-height:1.08;letter-spacing:-2px;margin:13px 0 12px;max-width:720px}.gradient{background:linear-gradient(90deg,#1556d9,#4d9fff);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{color:var(--muted);font-size:15px;line-height:1.65;max-width:650px;margin:0}
-.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:0 0 22px}.feature{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:17px;box-shadow:0 8px 26px #163b6810;transition:.2s}.feature:hover{transform:translateY(-2px);box-shadow:var(--shadow)}.feature .ico{width:38px;height:38px;border-radius:12px;display:grid;place-items:center;background:#eaf3ff;font-size:19px;margin-bottom:12px}.feature h3{margin:0 0 6px;font-size:14px}.feature p{margin:0;color:var(--muted);font-size:12px;line-height:1.55}
-.workspace{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(220px,.75fr);gap:15px;align-items:start}.panel{background:var(--panel);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}.panel-head{padding:17px 19px;border-bottom:1px solid #edf1f7;display:flex;justify-content:space-between;align-items:center;gap:10px}.panel-head h2{font-size:15px;margin:0}.panel-head p{margin:4px 0 0;font-size:11px;color:var(--muted)}.pill{font-size:10px;font-weight:800;color:#1769ff;background:#eaf3ff;border-radius:999px;padding:7px 9px;white-space:nowrap}
-.chat-body{height:315px;overflow:auto;padding:17px;background:linear-gradient(180deg,#fbfdff,#fff)}.message{display:flex;gap:9px;margin-bottom:15px;align-items:flex-start}.avatar{flex:0 0 29px;height:29px;border-radius:10px;background:#e7f1ff;color:#1769ff;display:grid;place-items:center;font-size:13px;font-weight:900}.message.user{flex-direction:row-reverse}.message.user .avatar{background:#193a70;color:white}.bubble{max-width:86%;border:1px solid #e7edf5;background:#fff;padding:11px 13px;border-radius:4px 14px 14px 14px;font-size:13px;line-height:1.6;white-space:pre-wrap;overflow-wrap:anywhere}.message.user .bubble{background:#edf5ff;border-color:#dceaff;border-radius:14px 4px 14px 14px}.chat-form{padding:13px;border-top:1px solid #edf1f7}.inputrow{display:flex;gap:8px;align-items:flex-end}.chat-form textarea{resize:vertical;min-height:45px;max-height:120px;flex:1;border:1px solid #dce5f0;border-radius:13px;padding:12px;outline:none;color:var(--ink);background:#fbfdff}.chat-form textarea:focus,.movie-form textarea:focus{border-color:#6aa7ff;box-shadow:0 0 0 3px #1769ff12}.send{border:0;background:linear-gradient(135deg,#1769ff,#4c9bff);color:white;font-weight:800;border-radius:12px;padding:12px 15px;box-shadow:0 7px 17px #1769ff2a}.fineprint{font-size:10px;color:#98a4b5;margin:9px 2px 0}
-.movie-form{padding:17px}.movie-form label{display:block;font-size:12px;font-weight:800;margin:0 0 7px}.movie-form textarea{width:100%;height:105px;resize:vertical;border:1px solid #dce5f0;border-radius:12px;padding:12px;outline:none;font-size:13px;line-height:1.5}.field{margin-bottom:14px}.movie-form select{width:100%;padding:10px;border:1px solid #dce5f0;border-radius:11px;background:#fff;color:var(--ink)}.full{width:100%}.output{display:none;border-top:1px solid #edf1f7;padding:15px;font-size:12px;line-height:1.7;white-space:pre-wrap;overflow-wrap:anywhere;max-height:350px;overflow:auto;background:#fbfdff}.quick{padding:0 17px 17px;display:flex;flex-wrap:wrap;gap:7px}.chip{border:1px solid #dce7f5;background:white;color:#4b6383;border-radius:999px;padding:7px 10px;font-size:11px;font-weight:700}.chip:hover{border-color:#8abaff;color:#1769ff}
-.footer{text-align:center;color:#93a1b4;font-size:11px;padding:22px}.toast{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:#17345d;color:white;padding:11px 16px;border-radius:12px;font-size:12px;box-shadow:var(--shadow);display:none;z-index:30;max-width:90vw}
-@media(max-width:850px){.layout{grid-template-columns:1fr}.sidebar{position:static;display:flex;align-items:center;gap:5px;overflow:auto;padding:8px}.nav-label,.sidebar-note{display:none}.navbtn{width:auto;white-space:nowrap;padding:10px 12px}.navbtn span{width:auto}.workspace{grid-template-columns:1fr}.hero{padding-top:14px}.cards{grid-template-columns:1fr 1fr}.cards .feature:last-child{grid-column:span 2}.chat-body{height:290px}}
-@media(max-width:480px){.topbar{height:65px;padding:0 13px}.brand{font-size:16px}.logo{width:35px;height:35px}.status{font-size:10px;padding:7px 8px}.layout{padding:16px 12px 28px;gap:13px}.hero h1{font-size:34px}.hero p{font-size:13px}.cards{gap:9px}.feature{padding:13px}.feature p{font-size:11px}.workspace{gap:13px}.panel-head{padding:14px}.chat-body{padding:12px;height:280px}.bubble{font-size:12px}.send{padding:12px}.hero h1{letter-spacing:-1.5px}}
+:root {
+  --bg: #080b18;
+  --panel: #11172b;
+  --panel2: #171f38;
+  --blue: #3987ff;
+  --purple: #9855ff;
+  --text: #f4f6ff;
+  --muted: #9aa6c5;
+  --border: #273252;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: Arial, sans-serif;
+  min-height: 100vh;
+}
+
+button, input, textarea, select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 5%;
+  border-bottom: 1px solid var(--border);
+  background: #0b1020;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.logo {
+  font-size: 22px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+.logo span {
+  color: var(--blue);
+}
+
+.status {
+  color: #8debb8;
+  font-size: 12px;
+}
+
+.container {
+  max-width: 1100px;
+  margin: auto;
+  padding: 28px 18px 50px;
+}
+
+.hero {
+  padding: 30px 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 8px 12px;
+  border: 1px solid #354875;
+  border-radius: 30px;
+  color: #a9caff;
+  font-size: 12px;
+  background: #111a32;
+}
+
+h1 {
+  font-size: clamp(32px, 6vw, 54px);
+  line-height: 1.12;
+  margin: 18px 0 12px;
+}
+
+.gradient {
+  background: linear-gradient(90deg, #55a5ff, #b477ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.description {
+  color: var(--muted);
+  line-height: 1.7;
+  max-width: 620px;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 22px 0;
+}
+
+.tab {
+  padding: 12px 18px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--panel);
+  color: var(--text);
+}
+
+.tab.active {
+  background: linear-gradient(110deg, #2563eb, #7844e8);
+  border-color: transparent;
+}
+
+.card {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 22px;
+  margin-bottom: 20px;
+  box-shadow: 0 12px 35px #00000016;
+}
+
+.card h2 {
+  margin-top: 0;
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  color: #c4cce1;
+  margin: 16px 0 8px;
+}
+
+input, textarea, select {
+  width: 100%;
+  padding: 13px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #090e1f;
+  color: white;
+  outline: none;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--blue);
+}
+
+textarea {
+  min-height: 110px;
+  resize: vertical;
+  line-height: 1.6;
+}
+
+.primary {
+  border: 0;
+  border-radius: 10px;
+  padding: 13px 18px;
+  background: linear-gradient(100deg, #2678ff, #8549f5);
+  color: white;
+  font-weight: bold;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.primary:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+
+.secondary {
+  background: var(--panel2);
+  color: white;
+  border: 1px solid var(--border);
+  padding: 10px 14px;
+  border-radius: 9px;
+}
+
+.output {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+  color: #e2e8ff;
+  min-height: 50px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.messages {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 18px 0;
+}
+
+.message {
+  padding: 14px;
+  border-radius: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.user {
+  background: #1b3159;
+  align-self: flex-end;
+  max-width: 95%;
+}
+
+.assistant {
+  background: #171f38;
+  border: 1px solid var(--border);
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.small {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+footer {
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+  padding: 25px 10px;
+  border-top: 1px solid var(--border);
+}
+
+@media (min-width: 750px) {
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+}
 </style>
 </head>
+
 <body>
-<div class="app">
-<header class="topbar">
-  <div class="brand"><div class="logo">Z</div><div>ZZEBTRIX<small>ARTIFICIAL INTELLIGENCE</small></div></div>
-  <div class="top-right"><div class="status"><i id="statusDot"></i><span id="connection">Checking…</span></div></div>
+
+<header>
+  <div class="logo">ZZEBTRIX<span> AI</span></div>
+  <div class="status">● AI STUDIO</div>
 </header>
-<div class="layout">
-  <aside class="sidebar">
-    <div class="nav-label">WORKSPACE</div>
-    <button class="navbtn active" data-target="chatPanel"><span>✦</span> AI Chat</button>
-    <button class="navbtn" data-target="moviePanel"><span>🎬</span> Movie Studio</button>
-    <button class="navbtn" data-target="ideasPanel"><span>✧</span> Explore</button>
-    <div class="sidebar-note"><strong>Your ideas, amplified.</strong><p>One creative space for conversations, stories, and your next big idea.</p></div>
-  </aside>
-  <main>
-    <section class="hero">
-      <div class="eyebrow">Meet your creative co-pilot</div>
-      <h1>Think bigger.<br><span class="gradient">Create beyond.</span></h1>
-      <p>Welcome to ZZEBTRIX AI — your space to ask questions, shape ideas, and turn movie concepts into stories. What will you create today?</p>
-    </section>
-    <section class="cards">
-      <div class="feature"><div class="ico">🧠</div><h3>AI Assistant</h3><p>Explore ideas, learn new things, write, plan, and solve problems.</p></div>
-      <div class="feature"><div class="ico">🎬</div><h3>Movie Studio</h3><p>Turn a simple idea into a structured cinematic concept.</p></div>
-      <div class="feature"><div class="ico">⚡</div><h3>Built to grow</h3><p>A starting point for a bigger AI platform and creator toolkit.</p></div>
-    </section>
-    <section class="workspace">
-      <div class="panel" id="chatPanel">
-        <div class="panel-head"><div><h2>✦ Chat with ZZEBTRIX</h2><p>Ask a question or start with an idea.</p></div><span class="pill">AI ASSISTANT</span></div>
-        <div class="chat-body" id="chatBody">
-          <div class="message"><div class="avatar">Z</div><div class="bubble">Hey! 👋 I'm ZZEBTRIX. I can help you brainstorm, write, plan a project, or develop a movie idea. What are we working on?</div></div>
-        </div>
-        <form class="chat-form" id="chatForm"><div class="inputrow"><textarea id="chatInput" aria-label="Message ZZEBTRIX" placeholder="Message ZZEBTRIX..." rows="1"></textarea><button class="send" type="submit">Send ↗</button></div><div class="fineprint" id="chatFineprint">Checking AI connection…</div></form>
-        <div class="quick"><button class="chip" data-prompt="Give me 5 business ideas I can start online">💡 Business ideas</button><button class="chip" data-prompt="Help me create an exciting Nigerian movie idea">🎬 Movie idea</button><button class="chip" data-prompt="Teach me how AI works in simple words">🧠 Explain AI</button></div>
+
+<main class="container">
+
+  <section class="hero">
+    <span class="badge">YOUR CREATIVE AI WORKSPACE</span>
+
+    <h1>
+      Imagine it.<br>
+      <span class="gradient">Create it with AI.</span>
+    </h1>
+
+    <p class="description">
+      Create movie scripts, develop characters, build stories,
+      and ask questions with your ZZEBTRIX AI assistant.
+    </p>
+  </section>
+
+  <nav class="tabs">
+    <button class="tab active" id="chatTab" onclick="showPage('chat')">
+      🤖 AI Assistant
+    </button>
+
+    <button class="tab" id="movieTab" onclick="showPage('movie')">
+      🎬 Movie Studio
+    </button>
+  </nav>
+
+  <!-- AI ASSISTANT -->
+
+  <section id="chatPage" class="card">
+    <h2>🤖 ZZEBTRIX AI Assistant</h2>
+
+    <p class="small">
+      Ask questions, brainstorm ideas, or get help improving your stories.
+    </p>
+
+    <div id="messages" class="messages">
+      <div class="message assistant">
+        Welcome to ZZEBTRIX AI! 👋
+
+        I can help you answer questions, create stories,
+        develop characters, and brainstorm new ideas.
+
+        What would you like to do today?
       </div>
-      <div class="panel" id="moviePanel">
-        <div class="panel-head"><div><h2>🎬 AI Movie Studio</h2><p>Start with one sentence.</p></div><span class="pill">CREATOR</span></div>
-        <form class="movie-form" id="movieForm">
-          <div class="field"><label for="movieIdea">Your movie idea</label><textarea id="movieIdea" placeholder="A broke young man discovers a mysterious system that changes his destiny..."></textarea></div>
-          <div class="field"><label for="genre">Genre</label><select id="genre"><option>Drama</option><option>Action</option><option>Fantasy</option><option>Comedy</option><option>Thriller</option><option>Romance</option></select></div>
-          <div class="field"><label for="style">Style</label><select id="style"><option>Realistic Nollywood</option><option>Epic cinematic</option><option>Modern urban</option><option>Fantasy adventure</option></select></div>
-          <button class="send full" type="submit">Create movie blueprint ✨</button>
-        </form>
-        <div class="output" id="movieOutput"></div><div class="quick" id="movieActions" style="display:none"><button class="chip" id="copyMovie">Copy blueprint</button><button class="chip" id="downloadMovie">Download .txt</button></div>
-      </div>
-    </section>
-    <section class="panel" id="ideasPanel" style="margin-top:15px">
-      <div class="panel-head"><div><h2>✧ Explore what you can make</h2><p>Choose a starting point to fill the chat.</p></div></div>
-      <div class="quick" style="padding-top:15px"><button class="chip" data-prompt="Write a short viral TikTok story with a surprising ending">TikTok story</button><button class="chip" data-prompt="Help me plan a small online business with no starting budget">Online business</button><button class="chip" data-prompt="Create a character profile for a Nigerian fantasy hero">Character builder</button><button class="chip" data-prompt="Give me a 30-second promo video script for my brand">Promo video</button></div>
-    </section>
-    <div class="footer">ZZEBTRIX AI © <span id="year"></span> · Built for curious minds and bold creators.</div>
-  </main>
-</div>
-<div class="toast" id="toast"></div>
-</div>
+    </div>
+
+    <form id="chatForm">
+      <label for="chatInput">Your message</label>
+
+      <textarea
+        id="chatInput"
+        placeholder="Ask ZZEBTRIX AI anything..."
+        required
+      ></textarea>
+
+      <button class="primary" id="chatButton" type="submit">
+        Send Message →
+      </button>
+    </form>
+
+    <p id="chatStatus" class="small" aria-live="polite"></p>
+  </section>
+
+  <!-- MOVIE STUDIO -->
+
+  <section id="moviePage" class="hidden">
+
+    <div class="card">
+      <h2>🎬 AI Movie Script Writer</h2>
+
+      <p class="small">
+        Turn your idea into a movie script with characters,
+        scenes, dialogue, and cinematic descriptions.
+      </p>
+
+      <form id="movieForm">
+
+        <label for="title">Movie title (optional)</label>
+        <input
+          id="title"
+          placeholder="e.g. The Price of Fame and Wealth"
+        >
+
+        <label for="genre">Movie genre</label>
+        <select id="genre">
+          <option>Drama</option>
+          <option>Action</option>
+          <option>Fantasy</option>
+          <option>Comedy</option>
+          <option>Romance</option>
+          <option>Thriller</option>
+          <option>Science Fiction</option>
+        </select>
+
+        <label for="style">Movie style</label>
+        <select id="style">
+          <option>Realistic Nollywood</option>
+          <option>Hollywood Cinematic</option>
+          <option>African Fantasy</option>
+          <option>Anime</option>
+          <option>Documentary</option>
+        </select>
+
+        <label for="idea">Describe your movie idea</label>
+        <textarea
+          id="idea"
+          placeholder="Describe the characters, setting, problem, or story you want..."
+          required
+        ></textarea>
+
+        <label for="length">Script length</label>
+        <select id="length">
+          <option value="short">Short video (1–3 minutes)</option>
+          <option value="medium">Short film (5–10 minutes)</option>
+          <option value="long">Longer movie outline</option>
+        </select>
+
+        <button class="primary" id="movieButton" type="submit">
+          ✨ Generate Movie Script
+        </button>
+
+      </form>
+
+      <p id="movieStatus" class="small" aria-live="polite"></p>
+    </div>
+
+    <div id="movieResultCard" class="card hidden">
+      <h2>Your Movie Script</h2>
+
+      <div id="movieResult" class="output"></div>
+
+      <button class="secondary" onclick="copyScript()">
+        Copy Script
+      </button>
+
+      <button class="secondary" onclick="downloadScript()">
+        Download TXT
+      </button>
+    </div>
+
+  </section>
+
+</main>
+
+<footer>
+  ZZEBTRIX AI · Your ideas, powered by AI.
+  <br><br>
+  AI responses may require a configured AI provider and available service.
+</footer>
+
 <script>
-const $=s=>document.querySelector(s);
-$("#year").textContent=new Date().getFullYear();
-const toast=(msg)=>{const t=$("#toast");t.textContent=msg;t.style.display="block";clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display="none",2800)};
-document.querySelectorAll(".navbtn").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".navbtn").forEach(x=>x.classList.remove("active"));b.classList.add("active");document.getElementById(b.dataset.target).scrollIntoView({behavior:"smooth",block:"start"})}));
-document.querySelectorAll("[data-prompt]").forEach(b=>b.addEventListener("click",()=>{$("#chatInput").value=b.dataset.prompt;$("#chatInput").focus();$("#chatPanel").scrollIntoView({behavior:"smooth",block:"start"})}));
-function addMessage(text,who){const row=document.createElement("div");row.className="message "+(who==="user"?"user":"");const av=document.createElement("div");av.className="avatar";av.textContent=who==="user"?"You":"Z";const bubble=document.createElement("div");bubble.className="bubble";bubble.textContent=text;row.append(av,bubble);$("#chatBody").append(row);$("#chatBody").scrollTop=$("#chatBody").scrollHeight}
-function localReply(text){const q=text.toLowerCase();if(q.includes("movie")||q.includes("film")||q.includes("story"))return "I can help you build this into a complete movie concept. Use Movie Studio to generate a structured blueprint with characters, scenes, dialogue, and cinematic visual prompts.\n\nStatus: local preview mode. Connect the secure backend to enable model-powered answers.";if(q.includes("business")||q.includes("money")||q.includes("earn"))return "Start by choosing one real problem you can solve with skills you already have. Test demand with a small service before spending money, keep track of costs, and avoid promises of guaranteed income.\n\nStatus: local preview mode. Connect the secure backend to enable model-powered answers.";if(q.includes("ai")||q.includes("explain"))return "Artificial intelligence (AI) is software that uses patterns learned from examples to generate responses, predictions, or content. ZZEBTRIX is designed to connect to a model through a secure backend, so private API keys stay on the server.\n\nStatus: local preview mode. Connect the secure backend to enable model-powered answers.";return "Thanks for trying ZZEBTRIX AI. The interface is working, but real AI responses require the backend to be deployed and configured with an AI provider. Your message is not being sent to an AI model in this preview."}
-async function checkHealth(){try{const r=await fetch("/.netlify/functions/health");if(!r.ok)throw new Error();const d=await r.json();if(d.aiConfigured){$("#connection").textContent="AI connected";$("#statusDot").style.background="#22c55e";$("#chatFineprint").textContent="Connected to ZZEBTRIX AI."}else{$("#connection").textContent="AI setup needed";$("#statusDot").style.background="#f0ad4e";$("#chatFineprint").textContent="Backend is online, but the AI provider key is not configured yet."}}catch{$("#connection").textContent="Preview mode";$("#statusDot").style.background="#f0ad4e";$("#chatFineprint").textContent="Local preview mode. Publish the site and add a private OpenRouter API key to enable live AI."}}
-async function askBackend(message){try{const r=await fetch("/.netlify/functions/chat",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({message})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||"AI service is not ready.");if(!d.reply)throw new Error("No reply returned.");$("#connection").textContent="AI connected";$("#statusDot").style.background="#22c55e";return d.reply}catch(e){$("#connection").textContent="AI setup needed";$("#statusDot").style.background="#f0ad4e";return "I couldn't reach the live AI service yet. " + (e && e.message ? e.message : "The AI backend is not configured.") + "\n\nYour message has not been answered by a live AI model. The website needs its private AI key configured on the hosting service."}}
-// Restore the recent chat on this device only.
-try{const saved=JSON.parse(localStorage.getItem("zzebtrix_chat_v1")||"[]");saved.slice(-20).forEach(m=>addMessage(m.text,m.who))}catch{}
-function saveChat(text,who){try{const saved=JSON.parse(localStorage.getItem("zzebtrix_chat_v1")||"[]");saved.push({text,who});localStorage.setItem("zzebtrix_chat_v1",JSON.stringify(saved.slice(-40)))}catch{}}
-const originalAddMessage=addMessage;addMessage=function(text,who){originalAddMessage(text,who);saveChat(text,who)};
-$("#chatForm").addEventListener("submit",async e=>{e.preventDefault();const input=$("#chatInput");const text=input.value.trim();if(!text)return;input.value="";addMessage(text,"user");const wait=document.createElement("div");wait.className="message";const av=document.createElement("div");av.className="avatar";av.textContent="Z";const bubble=document.createElement("div");bubble.className="bubble";bubble.textContent="Thinking…";wait.append(av,bubble);$("#chatBody").append(wait);$("#chatBody").scrollTop=$("#chatBody").scrollHeight;const reply=await askBackend(text);wait.remove();addMessage(reply,"ai")});
-let lastMovieText="";
-$("#movieForm").addEventListener("submit",async e=>{e.preventDefault();const idea=$("#movieIdea").value.trim();if(!idea){toast("Add your movie idea first.");return}const genre=$("#genre").value,style=$("#style").value;const out=$("#movieOutput");out.style.display="block";$("#movieActions").style.display="none";out.textContent="Creating your blueprint…";try{const r=await fetch("/.netlify/functions/movie",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({idea,genre,style})});const d=await r.json().catch(()=>({}));if(!r.ok)throw new Error(d.error||"AI service not ready");lastMovieText=d.result||d.reply||"No result returned."}catch{lastMovieText=`MOVIE BLUEPRINT — ${genre.toUpperCase()}\n\nIDEA\n${idea}\n\nLOGLINE\nA compelling protagonist pursues a meaningful goal, but an unexpected obstacle forces a choice that changes their future.\n\nSYNOPSIS\nOpening: introduce the protagonist, their world, and what they want.\nRising action: a discovery or setback makes the goal harder.\nTurning point: a difficult choice reveals the protagonist's values.\nClimax: the protagonist confronts the central conflict.\nResolution: show the consequences and leave a memorable final image.\n\nMAIN CHARACTERS\n1. Protagonist — goal, strength, flaw, and personal stakes.\n2. Ally — a supporter whose loyalty or priorities are tested.\n3. Antagonist — a rival, person, or force blocking the goal.\n\nFIVE SCENE STARTERS\n1. Opening image: establish the setting and the protagonist’s everyday struggle.\n2. Inciting incident: an unexpected event disrupts normal life.\n3. First major decision: the protagonist chooses a risky path.\n4. Turning point: a revelation changes what the protagonist believes.\n5. Finale: a decisive choice resolves the main conflict.\n\nVISUAL DIRECTION\n${style}; ${genre}; cinematic framing, expressive performances, motivated lighting, natural textures, and consistent character appearance.\n\nSCENE IMAGE PROMPT STARTER\nUltra-realistic cinematic ${style} scene for a ${genre} film, based on: ${idea}. Maintain consistent character faces and clothing, realistic environment, dramatic but natural lighting, detailed production design, 16:9 composition.\n\nPREVIEW NOTE\nThis is a local starter blueprint, not a full AI-generated movie. Deploy and configure the backend to generate a custom, detailed version.`}out.textContent=lastMovieText;$("#movieActions").style.display="flex";});
-$("#copyMovie").addEventListener("click",async()=>{try{await navigator.clipboard.writeText(lastMovieText);toast("Blueprint copied.")}catch{toast("Copy is unavailable in this browser. Use Download instead.")}});
-$("#downloadMovie").addEventListener("click",()=>{const blob=new Blob([lastMovieText],{type:"text/plain;charset=utf-8"});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="zzebtrix-movie-blueprint.txt";a.click();URL.revokeObjectURL(a.href);toast("Blueprint downloaded.")});
-checkHealth();
-</script>
-</body>
-</html>
+const $ = (id) => document.getElementById(id);
+
+function showPage(page) {
+  $("chatPage").classList.toggle("hidden", page !== "chat");
+  $("moviePage").classList.toggle("hidden", page !== "movie");
+
+  $("chatTab").classList.toggle("active", page === "chat");
+  $("movieTab").classList.toggle("active", page === "movie");
+}
+
+function addMessage(text, type) {
+  const item = document.createElement("div");
+  item.className = "message " + type;
+  item.textContent = text;
+
+  $("messages").appendChild(item);
+
+  item.scrollIntoView({
+    behavior: "smooth",
+    block: "nearest"
+  });
+
+  return item;
+}
+
+async function askAI(message) {
+  const response = await fetch("/api/chat", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      message: message
+    })
+  });
+
+  let data;
+
+  try {
+    data = await response.json();
+  } catch {
+    throw new Error(
+      "The server returned an invalid response. Please try again."
+    );
+  }
+
+  if (!response.ok || !data.success) {
+    throw new Error(
+      data.error || "The AI service could not answer."
+    );
+  }
+
+  return data.reply;
+}
+
+$("chatForm").addEventListener("submit", async function(event) {
+  event.preventDefault();
+
+  const input = $("chatInput");
+  const button = $("chatButton");
+  const message = input.value.trim();
+
+  if (!message) return;
+
+  addMessage(message, "user");
+  input.value = "";
+  button.disabled = true;
+  button.textContent = "Thinking...";
+  $("chatStatus").textContent = "Connecting to ZZEBTRIX AI...";
+
+  const waiting = addMessage(
+    "I'm working on your answer...",
+    "assistant"
+  );
+
+  try {
+    const reply = await askAI(message);
+    waiting.textContent = reply;
+    $("
